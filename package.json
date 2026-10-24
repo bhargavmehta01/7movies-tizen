@@ -1,0 +1,18 @@
+{
+  "name": "sevenmovies-tv-guard",
+  "version": "0.1.0",
+  "private": true,
+  "appName": "7Movies TV \u2014 Ad Guard",
+  "description": "Best-effort 7Movies ad preference, popup suppression and known-host filtering for TizenBrew.",
+  "packageType": "mods",
+  "websiteURL": "https://7movies.ac",
+  "main": "adblock.js",
+  "evaluateScriptOnDocumentStart": false,
+  "keys": [],
+  "scripts": {
+    "test": "node adblock.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}
