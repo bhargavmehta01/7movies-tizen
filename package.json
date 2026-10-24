@@ -1,9 +1,9 @@
 {
   "name": "sevenmovies-tv-guard",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "appName": "7Movies TV",
-  "description": "Remote-first TV interface, on-screen search keyboard and best-effort ad guard for TizenBrew.",
+  "description": "Native Samsung TV app experience with sidebar navigation, QWERTY keyboard, spatial navigation with focus memory, and ad guard for TizenBrew.",
   "packageType": "mods",
   "websiteURL": "https://7movies.ac",
   "main": "module.js",

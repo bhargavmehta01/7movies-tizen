@@ -4,21 +4,62 @@ Prepared for Samsung QN49Q6FAM (2017), Tizen 3.0, with TizenBrew already install
 This is source for a TizenBrew site-modification module, not a signed standalone
 widget. It does not activate merely by reinstalling the original launcher.
 
-## TV interface (v0.2.0)
+## TV interface (v0.3.0) — Native Samsung TV experience
 
-- Persistent Home, Movies, TV shows, Discover, Search and Refresh navigation.
-- Arrow-key spatial navigation, visible cyan focus rings and automatic scrolling.
-- OK selects the focused card or button; Back closes the keyboard or returns.
-- Search opens an on-screen remote keyboard: letters, numbers, Space, Delete,
-  Clear and Done. Results use the website's search. After Done, arrows move from
-  the search field into results. Physical keyboards can still enter text.
-- Larger buttons and headings, with desktop navigation and row arrows hidden.
+Built to feel like a native Samsung TV app (TizenTube-style), not a website
+overlay. The interface is designed for Samsung TV remotes with D-pad navigation.
 
-This is a TV presentation layer over the website, not a separate native catalog.
-The website must still load successfully in the TV browser. The injected code
-uses ES5 syntax, but does not transpile the website's own modern JavaScript.
-Cross-origin player controls and remote events inside player frames are not
-covered by the top-level TV navigation layer. Playback remains provider-dependent.
+### Sidebar navigation
+- **Collapsible left sidebar** with icon + label navigation (Home, Movies, TV
+  Shows, Discover, Search, Refresh)
+- Press **←** at the left edge of content to open the sidebar
+- **↑ ↓** navigates sidebar items, **OK** selects, **→** or **OK** closes
+- Active page is highlighted in the sidebar
+- The sidebar auto-collapses when you navigate into content
+- Mouse hover also opens/closes (for desktop preview testing)
+
+### Spatial navigation with focus memory
+- **Arrow-key D-pad navigation** between all focusable elements
+- **Row-based focus memory**: when you move vertically between rails (rows of
+  posters), the last focused card in each rail is remembered. Coming back to
+  that rail restores your position — just like Netflix/Samsung TV+
+- **Smooth scrolling**: horizontal rail scroll and page scroll animate smoothly
+- **Card focus effects**: focused cards scale up 8% with a blue glow ring and
+  elevated z-index, exactly like native TV app poster focus
+
+### On-screen QWERTY keyboard
+- Samsung TV-style **QWERTY keyboard layout** (not a flat grid of letters)
+- Rows: numbers, QWERTY, middle, bottom + action keys (Space, Delete, Clear, Done)
+- **Blinking cursor** in the query display
+- **Glassmorphism design** with backdrop blur, rounded corners, gradient background
+- Keys highlight blue with scale-up when focused
+- Typing is live — the search query updates as you type
+- **Done** submits, **Back** cancels
+
+### Media info preview
+- Hovering (focusing) a movie/TV card shows a **floating info popup** below it
+  with the title and metadata (year, rating)
+- Auto-hides when focus moves away
+
+### Premium visual design
+- **Dark theme** with deep navy/black gradients matching Samsung TV OS
+- **Glassmorphism** sidebar and keyboard with backdrop blur
+- **Smooth CSS transitions** on all interactive elements (0.2–0.3s cubic-bezier)
+- **Custom scrollbars** — thin, translucent blue
+- **Page-in animation** — content fades in on page load
+- **Samsung One font family** fallback chain
+- Clean hint bar at the bottom showing available controls
+
+### Enhanced remote control support
+- **D-pad arrows**: spatial navigation
+- **OK/Enter**: select or open keyboard on input fields
+- **Back/Return** (keyCode 10009): close keyboard → close sidebar → close dialog
+  → history back → double-tap to exit the app
+- **Play/Pause/Stop**: media playback controls
+- **Fast Forward/Rewind**: ±10 second seek
+- **Channel Up/Down**: page scroll by 80% of viewport
+- **Blue button**: quick-open Search
+- **Color buttons** (Red/Green/Yellow): reserved for future features
 
 ### Updating an existing installation
 
@@ -81,8 +122,11 @@ ads or total network traffic. They are not sent anywhere.
 Run `npm install --ignore-scripts` and `npm test` on a desktop with Node.js.
 The jsdom tests cover popup suppression, allowed movie links, preference setting,
 fetch/XHR/dynamic-resource filters, hostname boundaries, DOM cleanup, preservation
-of player content, origin scoping and duplicate injection. They do not substitute
-for testing on the TV or against real third-party players.
+of player content, origin scoping and duplicate injection. The TV UI tests cover
+sidebar creation, directional spatial navigation, QWERTY keyboard interaction
+(typing, delete, clear, done), Enter to open keyboard on inputs, Back to close,
+focus management, duplicate injection guards, hint bar, and style injection. They
+do not substitute for testing on the TV or against real third-party players.
 
 ## Foundations reviewed
 
@@ -99,7 +143,12 @@ The guard implementation is original code; no upstream source is bundled.
 ## Source layout
 
 `adblock.js` and `tv-ui.js` are concatenated into `module.js`, the runtime entry
-point. Rebuild module.js after editing either source. Tests are in
-`adblock.test.js` and `tv-ui.test.js`. The TV layout was visually checked using
-a static captured catalog; keyboard/navigation tests use jsdom. Actual TV
-search and third-party playback have not been verified.
+point. Rebuild module.js after editing either source:
+
+```sh
+cat adblock.js tv-ui.js > module.js
+```
+
+Tests are in `adblock.test.js` and `tv-ui.test.js`. The TV layout was visually
+checked using a static captured catalog; keyboard/navigation tests use jsdom.
+Actual TV search and third-party playback have not been verified.

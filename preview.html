@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-tv-preview>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920,height=1080">
+  <title>7Movies TV — Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0e1a;
+      color: #e8ecf4;
+      font-family: -apple-system, Arial, sans-serif;
+      min-height: 100vh;
+    }
+    /* Simulated site topbar (hidden by TV UI) */
+    .topbar { background: #111; padding: 16px 32px; display: flex; align-items: center; gap: 24px; }
+    .topbar a { color: #aaa; text-decoration: none; font-size: 16px; }
+    .topbar button { background: none; border: none; color: #aaa; font-size: 16px; cursor: pointer; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 480px;
+      background: linear-gradient(135deg, #1a0a2e 0%, #0d1b3e 50%, #0a2440 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 60px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #0a0e1a 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 600px; }
+    .hero-content h1 { font-size: 42px; font-weight: 700; margin-bottom: 12px; }
+    .hero-content p { font-size: 17px; color: #8899b0; line-height: 1.5; margin-bottom: 20px; }
+    .hero-content .hero-buttons { display: flex; gap: 12px; }
+    .hero-content button {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .hero-content .play-btn { background: #e8ecf4; color: #0a0e1a; }
+    .hero-content .info-btn { background: rgba(255,255,255,0.15); color: #e8ecf4; }
+
+    /* Rails */
+    .rail { margin: 32px 0; }
+    .rail h3 { font-size: 22px; font-weight: 600; color: #8899b0; margin: 0 0 16px 32px; }
+    .card-row {
+      display: flex;
+      gap: 16px;
+      padding: 8px 32px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+    }
+    .card-row::-webkit-scrollbar { height: 4px; }
+    .card-row::-webkit-scrollbar-thumb { background: rgba(0,180,255,0.15); border-radius: 2px; }
+
+    /* Cards */
+    .media-card {
+      flex: 0 0 auto;
+      width: 190px;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .media-card:hover { transform: scale(1.05); }
+    .media-card .poster {
+      width: 100%;
+      height: 270px;
+      border-radius: 12px 12px 0 0;
+      display: block;
+    }
+    .media-card .card-info { padding: 10px 12px; }
+    .media-card .card-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .media-card .card-info .meta { font-size: 12px; color: #5a6d8a; }
+    .media-card .card-info .rating { color: #fbbf24; }
+    footer { background: #060810; padding: 40px 32px; color: #3a4a60; font-size: 14px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="/">7Movies</a>
+    <a href="/">Home</a>
+    <a href="/movies">Movies</a>
+    <a href="/tv">TV</a>
+    <a href="/discover">Discover</a>
+    <button aria-label="Search">🔍</button>
+  </header>
+
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Spider-Man: Brand New Day</h1>
+      <p>Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short. A cutting-edge treatment returns him to his former self... but spirals him down a path of revenge.</p>
+      <div class="hero-buttons">
+        <button class="play-btn" tabindex="0">▶ Play</button>
+        <button class="info-btn" tabindex="0">ℹ More Info</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="rail" id="top10">
+      <h3>🔥 Top 10 Today</h3>
+      <div class="card-row">
+        <a href="/tv/2190" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#1e3a5f,#0d1b2a);"></div>
+          <div class="card-info"><h4>South Park</h4><div class="meta">1997 · TV · <span class="rating">★ 8.3</span></div></div>
+        </a>
+        <a href="/tv/105248" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#ff6b35,#2d1f3d);"></div>
+          <div class="card-info"><h4>Cyberpunk: Edgerunners</h4><div class="meta">2022 · TV · <span class="rating">★ 8.5</span></div></div>
+        </a>
+        <a href="/tv/5920" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#3a6186,#89253e);"></div>
+          <div class="card-info"><h4>The Mentalist</h4><div class="meta">2008 · TV · <span class="rating">★ 8.4</span></div></div>
+        </a>
+        <a href="/tv/1421" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#667eea,#764ba2);"></div>
+          <div class="card-info"><h4>Modern Family</h4><div class="meta">2009 · TV · <span class="rating">★ 7.9</span></div></div>
+        </a>
+        <a href="/tv/1399" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#0f2027,#203a43);"></div>
+          <div class="card-info"><h4>Game of Thrones</h4><div class="meta">2011 · TV · <span class="rating">★ 8.5</span></div></div>
+        </a>
+        <a href="/tv/125935" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#11998e,#38ef7d);"></div>
+          <div class="card-info"><h4>Abbott Elementary</h4><div class="meta">2021 · TV · <span class="rating">★ 7.5</span></div></div>
+        </a>
+        <a href="/tv/60625" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#36d1dc,#5b86e5);"></div>
+          <div class="card-info"><h4>Rick and Morty</h4><div class="meta">2013 · TV · <span class="rating">★ 8.7</span></div></div>
+        </a>
+        <a href="/movie/969681" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#c0392b,#2c3e50);"></div>
+          <div class="card-info"><h4>Spider-Man: Brand New Day</h4><div class="meta">2026 · Movie · <span class="rating">★ 8.5</span></div></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="rail" id="trending">
+      <h3>📈 Trending Now</h3>
+      <div class="card-row">
+        <a href="/movie/1400940" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#614385,#516395);"></div>
+          <div class="card-info"><h4>Clayface</h4><div class="meta">2026 · Movie · <span class="rating">★ 7.6</span></div></div>
+        </a>
+        <a href="/movie/1477104" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#56ab2f,#a8e063);"></div>
+          <div class="card-info"><h4>Shaun the Sheep</h4><div class="meta">2026 · Movie · <span class="rating">★ 7.4</span></div></div>
+        </a>
+        <a href="/movie/1108427" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#1488cc,#2b32b2);"></div>
+          <div class="card-info"><h4>Moana</h4><div class="meta">2026 · Movie · <span class="rating">★ 7.5</span></div></div>
+        </a>
+        <a href="/movie/1198654" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#c94b4b,#4b134f);"></div>
+          <div class="card-info"><h4>Bad Apples</h4><div class="meta">2026 · Movie · <span class="rating">★ 6.7</span></div></div>
+        </a>
+        <a href="/movie/1339713" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#2c3e50,#4ca1af);"></div>
+          <div class="card-info"><h4>Obsession</h4><div class="meta">2026 · Movie · <span class="rating">★ 8.2</span></div></div>
+        </a>
+        <a href="/movie/1153576" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#f12711,#f5af19);"></div>
+          <div class="card-info"><h4>Street Fighter</h4><div class="meta">2026 · Movie · <span class="rating">★ 6.3</span></div></div>
+        </a>
+        <a href="/movie/1288069" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#0f2027,#2c5364);"></div>
+          <div class="card-info"><h4>Tenzing</h4><div class="meta">2026 · Movie · <span class="rating">★ 8.2</span></div></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="rail" id="new-seasons">
+      <h3>🆕 New Seasons</h3>
+      <div class="card-row">
+        <a href="/tv/1416" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#2193b0,#6dd5ed);"></div>
+          <div class="card-info"><h4>Grey's Anatomy</h4><div class="meta">2005 · TV · <span class="rating">★ 8.2</span></div></div>
+        </a>
+        <a href="/tv/1411" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#373b44,#4286f4);"></div>
+          <div class="card-info"><h4>Person of Interest</h4><div class="meta">2011 · TV · <span class="rating">★ 8.1</span></div></div>
+        </a>
+        <a href="/tv/1396" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#141e30,#243b55);"></div>
+          <div class="card-info"><h4>Breaking Bad</h4><div class="meta">2008 · TV · <span class="rating">★ 9.0</span></div></div>
+        </a>
+        <a href="/tv/2190" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#eb5757,#000);"></div>
+          <div class="card-info"><h4>South Park</h4><div class="meta">1997 · TV · <span class="rating">★ 8.3</span></div></div>
+        </a>
+        <a href="/tv/549" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#457fca,#5691c8);"></div>
+          <div class="card-info"><h4>Law & Order</h4><div class="meta">1990 · TV · <span class="rating">★ 7.3</span></div></div>
+        </a>
+        <a href="/tv/136315" class="media-card" tabindex="0">
+          <div class="poster" style="background:linear-gradient(135deg,#ff512f,#dd2476);"></div>
+          <div class="card-info"><h4>The Bear</h4><div class="meta">2022 · TV · <span class="rating">★ 8.2</span></div></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 7Movies TV Preview — This is a local preview for testing the TV interface</p>
+  </footer>
+
+  <script src="tv-ui.js"></script>
+</body>
+</html>
