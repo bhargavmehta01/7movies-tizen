@@ -1,8 +1,30 @@
-# 7Movies TV Ad Guard — TizenBrew module
+# 7Movies TV — TizenBrew module
 
 Prepared for Samsung QN49Q6FAM (2017), Tizen 3.0, with TizenBrew already installed.
 This is source for a TizenBrew site-modification module, not a signed standalone
 widget. It does not activate merely by reinstalling the original launcher.
+
+## TV interface (v0.2.0)
+
+- Persistent Home, Movies, TV shows, Discover, Search and Refresh navigation.
+- Arrow-key spatial navigation, visible cyan focus rings and automatic scrolling.
+- OK selects the focused card or button; Back closes the keyboard or returns.
+- Search opens an on-screen remote keyboard: letters, numbers, Space, Delete,
+  Clear and Done. Results use the website's search. After Done, arrows move from
+  the search field into results. Physical keyboards can still enter text.
+- Larger buttons and headings, with desktop navigation and row arrows hidden.
+
+This is a TV presentation layer over the website, not a separate native catalog.
+The website must still load successfully in the TV browser. The injected code
+uses ES5 syntax, but does not transpile the website's own modern JavaScript.
+Cross-origin player controls and remote events inside player frames are not
+covered by the top-level TV navigation layer. Playback remains provider-dependent.
+
+### Updating an existing installation
+
+Fully exit TizenBrew and reopen it to clear its in-memory module cache. If the
+old interface persists, remove and re-add the GitHub module using
+`bhargavmehta01/7movies-tizen@main`. The module is now named `7Movies TV`.
 
 ## What it does
 
@@ -28,7 +50,7 @@ Repository: https://github.com/bhargavmehta01/7movies-tizen
 
 1. In TizenBrew's Module Manager choose the GitHub module option.
 2. Enter `bhargavmehta01/7movies-tizen`.
-3. Launch `7Movies TV — Ad Guard` from TizenBrew, not the ordinary launcher.
+3. Launch `7Movies TV` from TizenBrew, not the ordinary launcher.
 4. Verify the site's Ads control reports off, browse a title, and test each player.
    Confirm that selecting play does not open a new window and that seeking,
    full screen, audio and the remote still work.
@@ -73,3 +95,11 @@ for testing on the TV or against real third-party players.
   substantially YouTube-specific and is not a ready-made general adblock engine.
 
 The guard implementation is original code; no upstream source is bundled.
+
+## Source layout
+
+`adblock.js` and `tv-ui.js` are concatenated into `module.js`, the runtime entry
+point. Rebuild module.js after editing either source. Tests are in
+`adblock.test.js` and `tv-ui.test.js`. The TV layout was visually checked using
+a static captured catalog; keyboard/navigation tests use jsdom. Actual TV
+search and third-party playback have not been verified.
